@@ -1,17 +1,35 @@
 import random
 import os
 
-class Deck():
-    deck = []
-    suits = ['\u2660', '\u2665', '\u2663', '\u2666'] #Spades, hearts, clubs, diamonds
-    values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    random.seed(os.urandom(1))
+class Card:
+    def __init__(self, s, v):
+        self.suit = s
+        self.value = v
+        self.display = "X|X"
+
+    def peak(self):
+        print(self.value + "|" + self.suit)
+
+    def flip(self):
+        if self.display == "X|X":
+            self.display = self.value + "|" + self.suit
+        else:
+            self.display = "X|X"
+
+
+class Deck:
+    def __init__(self):
+        self.deck = []
+        self.suits = ['\u2660', '\u2665', '\u2663', '\u2666'] #Spades, hearts, clubs, diamonds
+        self.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+        random.seed(os.urandom(1))
 
     def sort(self):
         i = 0
         for j in range(4):
             for k in range(13):
-                self.deck[i] = [self.suits[j], self.values[k]]
+                c = Card(self.suits[j], self.values[k])
+                self.deck[i] = [c]
                 i += 1
     
     def shuffle(self):
