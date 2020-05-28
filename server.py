@@ -15,17 +15,20 @@ def main():
     sock2.bind(server_address2)
 
     while True:
-        d1, a1 = sock1.recvform(4096)
-        d2, a2 = sock2.recvform(4096)
+        d1, a1 = sock1.recvfrom(4096)
+        d2, a2 = sock2.recvfrom(4096)
+        p1 = d1.decode('utf-8')
+        p2 = d2.decode('utf-8')
 
-        if d1 and d2:
+        if p1 == "connecting" and p2 == "connecting":
             m = "Both players connected.\n Beginning Game."
-            sock1.sendto(m, a1)
-            sock2.sendto(m, a2)
+            m1 = m.encode('utf-8')
+            sock1.sendto(m1, a1)
+            sock2.sendto(m1, a2)
             break
 
     turn = 1
-    print("Test complete")
+    print("Test complete.\n")
     sock1.close()
     sock2.close()
 

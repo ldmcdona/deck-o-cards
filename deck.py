@@ -25,12 +25,10 @@ class Deck:
         random.seed(os.urandom(1))
 
     def sort(self):
-        i = 0
         for j in range(4):
             for k in range(13):
                 c = Card(self.suits[j], self.values[k])
-                self.deck[i] = [c]
-                i += 1
+                self.deck.append(c)
     
     def shuffle(self):
         for i in range(52):
