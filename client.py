@@ -27,7 +27,7 @@ def main():
         print("Message recieved: " + d1 + "\n")
 
     finally:
-        print("Test complete.\n")
+        print("Test complete.")
         sock.close()
 
 main()

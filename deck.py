@@ -38,7 +38,10 @@ class Deck:
             self.deck[i] = temp
 
     def deal(self):
-        return self.deck.pop(0)
+        if len(self.deck) >= 1:
+            return self.deck.pop(0)
+        else:
+            return "Deck is Empty."
 
     def replace(self, card):
         self.deck.append(card)
