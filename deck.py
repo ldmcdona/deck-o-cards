@@ -5,16 +5,48 @@ class Card:
     def __init__(self, s, v):
         self.suit = s
         self.value = v
-        self.display = "X|X"
+        self.hidden = True
 
     def peak(self):
-        print(self.value + "|" + self.suit)
+        return self.value + "|" + self.suit
 
     def flip(self):
-        if self.display == "X|X":
-            self.display = self.value + "|" + self.suit
+        if self.hidden:
+            self.hidden = False
         else:
-            self.display = "X|X"
+            self.hidden = True
+
+
+class Hand:
+    def __init__(self):
+        self.cards = []
+
+    def add_card(self, card):
+        self.cards.append(card)
+
+    def remove_card(self, card):
+        for i in range(len(self.cards)):
+            if card == self.cards[i]:
+                self.cards.pop(i)
+                break
+    
+    def view(self):
+        message = "You have: " + len(self.cards) + " cards: "
+        for card in self.cards:
+            if card.hidden:
+                message += "H(" + card.peak + ")"
+            else:
+                message += "R(" + card.peak + ")"
+        return message
+
+    def check(self):
+        message = "The other player has: " + len(self.cards) + " cards: "
+        for card in self.cards:
+            if card.hidden:
+                message += "H(X|X)"
+            else:
+                message += "R(" + card.peak + ")"
+        return message
 
 
 class Deck:
