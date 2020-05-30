@@ -1,5 +1,5 @@
 import socket
-from deck import Deck, Hand
+from deck import *
 
 def commands(action, ph, sh, h):
     prime, second = ""
