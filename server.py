@@ -10,6 +10,9 @@ def commands(action, ph, sh, h):
         elif x[1] == "discard":
             pass
         elif x[1] == "flip":
+            #secondary "other player reveals a " + card.peak()
+            #or
+            #secondary "other player conceals a " + card.peak()
             pass
         else:
             pass
@@ -47,10 +50,9 @@ def commands(action, ph, sh, h):
         else:
             #Gonna check validity on client side.
             pass
-    return prime, second
+    return prime, second, ph, sh, h
 
 def main():
-    #actions = ["view", "check", "draw", "replace", "discard", "flip", "shuffle", "sort", "end"]
     house = Deck()
     house.sort()
     house.shuffle()
@@ -88,7 +90,7 @@ def main():
             if code1:
                 c1 = code1.decode('utf-8')
                 code1 = ""
-                p1m, p2m = commands(c1, hand1, hand2, house)
+                p1m, p2m, hand1, hand2, house = commands(c1, hand1, hand2, house)
 
             if code2:
                 c2 = code2.decode('utf-8')
@@ -113,7 +115,7 @@ def main():
             if code2:
                 c2 = code2.decode('utf-8')
                 code2 = ""
-                p2m, p1m = commands(c2, hand2, hand1, house)
+                p2m, p1m, hand2, hand1, house = commands(c2, hand2, hand1, house)
 
             if code1:
                 c1 = code1.decode('utf-8')
