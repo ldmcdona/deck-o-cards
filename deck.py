@@ -24,11 +24,8 @@ class Hand:
     def add_card(self, card):
         self.cards.append(card)
 
-    def remove_card(self, card):
-        for i in range(len(self.cards)):
-            if card == self.cards[i]:
-                self.cards.pop(i)
-                break
+    def remove_card(self, index):
+        self.cards.pop(index)
     
     def view(self):
         message = "You have: " + len(self.cards) + " cards: "
@@ -73,7 +70,7 @@ class Deck:
         if len(self.deck) >= 1:
             return self.deck.pop(0)
         else:
-            return "Deck is Empty."
+            return "The deck is empty."
 
     def replace(self, card):
         self.deck.append(card)
