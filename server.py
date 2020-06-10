@@ -10,7 +10,7 @@ def commands(action, ph, sh, h):
             ph.remove_card(x[1])
             h.replace(temp)
             prime = "You return the " + temp.peak + " to the deck.\n"
-            second = "The other player returns a card to the bottom of the deck.\n"
+            second = "The other player returns the " + temp.peak + " to the deck.\n"
 
         elif x[1] == "discard":
             temp = ph.cards[x[1]]
@@ -92,7 +92,7 @@ def main():
         p2 = d2.decode('utf-8')
 
         if p1 == "connecting" and p2 == "connecting":
-            m = "Both players connected. Beginning Game."
+            m = "Both players connected.\n"
             m1 = m.encode('utf-8')
             sock1.sendto(m1, a1)
             sock2.sendto(m1, a2)
@@ -112,7 +112,7 @@ def main():
                 code1 = ""
 
                 if c1 == "quit":
-                    m = "Player 1 has quit."
+                    m = "Player 1 has quit.\n"
                     m1 = m.encode('utf-8')
                     sock1.sendto(m1, a1)
                     sock1.sendto(m1, a2)
@@ -120,8 +120,8 @@ def main():
                     turn = 0
 
                 elif c1 == "end":
-                    player_one_message = "You end your turn."
-                    player_two_message = "The other player ends their turn. It's your turn."
+                    player_one_message = "You end your turn.\n"
+                    player_two_message = "The other player ends their turn.\n"
                     p1m = player_one_message.encode('utf-8')
                     p2m = player_two_message.encode('utf-8')
                     sock1.sendto(p1m, a1)
@@ -140,7 +140,7 @@ def main():
                 code2 = ""
 
                 if c2 == "quit":
-                    m = "Player 2 has quit."
+                    m = "Player 2 has quit.\n"
                     m1 = m.encode('utf-8')
                     sock1.sendto(m1, a1)
                     sock1.sendto(m1, a2)
@@ -148,8 +148,8 @@ def main():
                     turn = 0
 
                 elif c2 == "end":
-                    player_two_message = "You end your turn."
-                    player_one_message = "The other player ends their turn. It's your turn."
+                    player_two_message = "You end your turn.\n"
+                    player_one_message = "The other player ends their turn.\n"
                     p1m = player_one_message.encode('utf-8')
                     p2m = player_two_message.encode('utf-8')
                     sock1.sendto(p1m, a1)
@@ -164,7 +164,7 @@ def main():
             break
 
 
-    print("Test complete.")
+    print("Test complete.\n")
     sock1.close()
     sock2.close()
 
@@ -172,18 +172,5 @@ def main():
 
 main()
 
+#Credit to these guys for helping me remember how this works:
 #https://pymotw.com/2/socket/udp.html
-'''
-bluuuuuurg.
-
-Alright, bind two sockets and wait for data from em. 
-1st socket is player 1, 2nd socket is player 2
-Send em both messages as needed. 
-'''
-
-
-'''
-Two people playing cards. 
-Look at your hand. Look at opponents hand. Draw/Replace cards. Reveal Cards. Shuffle deck. End Turn. 
-That sounds like everything unless I want to do a discard pile, but we can save that for later. 
-'''
