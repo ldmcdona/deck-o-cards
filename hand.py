@@ -1,8 +1,13 @@
 #This file exists to do testing of deck.py stuff without having to go through the sockets.
+from deck import *
 
-m = "Hello World"
-print(m, type(m), "\n")
-e = m.encode('utf-8')
-print(e, type(e), "\n")
-d = e.decode('utf-8')
-print(d, type(d), "\n")
+h = Hand()
+d = Deck()
+
+d.sort()
+temp = d.deal()
+h.add_card(temp)
+
+x = h.cards[0]
+x.flip()
+print(x.hidden)

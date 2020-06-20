@@ -3,8 +3,9 @@ from deck import *
 
 def turn(sock, server_address):
     actions = ["view", "check", "draw", "replace", "discard", "flip", "shuffle", "sort", "end", "quit"]
+    special = ["replace", "discard", "flip"]
     while True:
-        x = input()
+        x = input(">")
         if x in actions:
             if x == 'quit':
                 m1 = x.encode('utf-8')
@@ -18,6 +19,15 @@ def turn(sock, server_address):
                 m = data.decode('utf-8')
                 print(m)
                 return
+
+            elif x in special:
+                y = input("Enter index of card. >")
+                message = x + " " + y
+                m1 = message.encode('utf-8')
+                sock.sendto(m1, server_address)
+                data, server = sock.recvfrom(4096)
+                m = data.decode('utf-8')
+                print(m)
 
             else:
                 m1 = x.encode('utf-8')
@@ -54,17 +64,17 @@ def main():
         d1 = data.decode('utf-8')
         print("Message recieved: " + d1 + "\n")
 
-        print("The game is beginning. On your turn your will be able to take the following actions:\n")
-        print("'view' to look at your hand, with hidden cards being marked H and revealed cards being marked R.\n")
-        print("'check' to look at your oppenents hand, with hidden cards being listed as H(X|X).\n")
-        print("'draw' to draw a new card from the deck.\n")
-        print("'replace x' to return card x in your hand to the deck, with x being its spot in your hand stating with 0.\n")
-        print("'discard x' to remove card x in your hand from the game.\n")
-        print("'flip x' to reveal or hide card x in you hand.\n")
-        print("'shuffle' to refill the deck then shuffle it.\n")
-        print("'sort' to refill and order the deck.\n")
-        print("'end' to end your turn.\n")
-        print("'quit' to end the game.\n")
+        print("The game is beginning. On your turn your will be able to take the following actions:")
+        print("'view' to look at your hand, with hidden cards being marked H and revealed cards being marked R.")
+        print("'check' to look at your oppenents hand, with hidden cards being listed as H(X|X).")
+        print("'draw' to draw a new card from the deck.")
+        print("'replace' to return a card in your hand to the deck.")
+        print("'discard' to remove a card in your hand from the game.")
+        print("'flip' to reveal or hide a card in you hand.")
+        print("'shuffle' to refill the deck then shuffle it.")
+        print("'sort' to refill and order the deck.")
+        print("'end' to end your turn.")
+        print("'quit' to end the game.")
 
         while game:
             if p == 1:

@@ -28,22 +28,31 @@ class Hand:
         self.cards.pop(index)
     
     def view(self):
-        message = "You have: " + len(self.cards) + " cards: "
+        x = str(len(self.cards))
+        message = "You have: " + x + " cards: "
         for card in self.cards:
+            y = card.peak()
             if card.hidden:
-                message += "H(" + card.peak + ")"
+                message += "H(" + y + ") "
             else:
-                message += "R(" + card.peak + ")"
+                message += "R(" + y + ") "
         return message
 
     def check(self):
-        message = "The other player has: " + len(self.cards) + " cards: "
+        x = str(len(self.cards))
+        message = "The other player has: " + x + " cards: "
         for card in self.cards:
             if card.hidden:
-                message += "H(X|X)"
+                message += "H(X|X) "
             else:
-                message += "R(" + card.peak + ")"
+                y = card.peak()
+                message += "R(" + y + ") "
         return message
+
+    def flip(self, i):
+        temp = self.cards[int(i)]
+        temp.flip()
+        return temp
 
 
 class Deck:
