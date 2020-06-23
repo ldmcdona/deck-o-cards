@@ -1,7 +1,6 @@
 # deck-o-cards
-Server has a deck of cards and takes input from clients. 
+A deck of cards game that allows 2 players to connect to a server and play together via terminal. Uses sockets and pre-set ports so maybe give the code a look before playing.
 
-My current side project.
+Initial testing suggests all bugs are cleared out and the code is commented. I might rework a few things but this project is looking pretty close to done.
 
-All theoretical updates complete. Now working on debugging.
-
+Feel free to make a branch and modify for your own ends. 
